@@ -45,3 +45,4 @@ nbdist/
 !*/build/*.html
 !*/build/*.xml
 /.feisuan/
+/前后端分离单体版/
