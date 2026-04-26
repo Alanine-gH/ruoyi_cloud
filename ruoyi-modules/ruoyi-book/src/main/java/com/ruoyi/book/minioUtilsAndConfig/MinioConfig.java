@@ -1,4 +1,4 @@
-package com.ruoyi.modules.monitor.config;
+package com.ruoyi.book.minioUtilsAndConfig;
 
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;

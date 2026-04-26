@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.book.mapper.BorrowItemMapper">
+    
+    <resultMap type="com.ruoyi.book.domain.BorrowItem" id="BorrowItemResult">
+        <result property="itemId"    column="item_id"    />
+        <result property="recordId"    column="record_id"    />
+        <result property="bookId"    column="book_id"    />
+        <result property="bookName"    column="book_name"    />
+    </resultMap>
+
+    <sql id="selectBorrowItemVo">
+        select item_id, record_id, book_id, book_name from borrow_item
+    </sql>
+
+    <select id="selectBorrowItemList" parameterType="com.ruoyi.book.domain.BorrowItem" resultMap="BorrowItemResult">
+        <include refid="selectBorrowItemVo"/>
+        <where>  
+            <if test="recordId != null "> and record_id = #{recordId}</if>
+            <if test="bookId != null "> and book_id = #{bookId}</if>
+            <if test="bookName != null  and bookName != ''"> and book_name like concat('%', #{bookName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBorrowItemByItemId" parameterType="Long" resultMap="BorrowItemResult">
+        <include refid="selectBorrowItemVo"/>
+        where item_id = #{itemId}
+    </select>
+
+    <insert id="insertBorrowItem" parameterType="com.ruoyi.book.domain.BorrowItem" useGeneratedKeys="true" keyProperty="itemId">
+        insert into borrow_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">record_id,</if>
+            <if test="bookId != null">book_id,</if>
+            <if test="bookName != null and bookName != ''">book_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">#{recordId},</if>
+            <if test="bookId != null">#{bookId},</if>
+            <if test="bookName != null and bookName != ''">#{bookName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBorrowItem" parameterType="com.ruoyi.book.domain.BorrowItem">
+        update borrow_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recordId != null">record_id = #{recordId},</if>
+            <if test="bookId != null">book_id = #{bookId},</if>
+            <if test="bookName != null and bookName != ''">book_name = #{bookName},</if>
+        </trim>
+        where item_id = #{itemId}
+    </update>
+
+    <delete id="deleteBorrowItemByItemId" parameterType="Long">
+        delete from borrow_item where item_id = #{itemId}
+    </delete>
+
+    <delete id="deleteBorrowItemByItemIds" parameterType="String">
+        delete from borrow_item where item_id in 
+        <foreach item="itemId" collection="array" open="(" separator="," close=")">
+            #{itemId}
+        </foreach>
+    </delete>
+</mapper>
