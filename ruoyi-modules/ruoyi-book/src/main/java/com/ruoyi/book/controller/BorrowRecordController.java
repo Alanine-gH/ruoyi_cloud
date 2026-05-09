@@ -28,7 +28,7 @@ import com.ruoyi.common.core.web.page.TableDataInfo;
  * @date 2026-05-06
  */
 @RestController
-@RequestMapping("/record")
+@RequestMapping("/book/record")
 public class BorrowRecordController extends BaseController
 {
     @Autowired

@@ -28,7 +28,7 @@ import com.ruoyi.common.core.web.page.TableDataInfo;
  * @date 2026-05-06
  */
 @RestController
-@RequestMapping("/detail")
+@RequestMapping("/book/detail")
 public class BookController extends BaseController
 {
     @Autowired

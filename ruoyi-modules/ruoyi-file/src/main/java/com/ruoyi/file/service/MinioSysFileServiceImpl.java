@@ -2,6 +2,7 @@ package com.ruoyi.file.service;
 
 import java.io.InputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.nacos.common.utils.IoUtils;
@@ -18,6 +19,7 @@ import io.minio.RemoveObjectArgs;
  * @author ruoyi
  */
 @Service
+@Primary
 public class MinioSysFileServiceImpl implements ISysFileService
 {
     @Autowired
