@@ -42,24 +42,3 @@ export function delDetail(bookId) {
     method: 'delete'
   })
 }
-
-// 下载书籍导入模板
-export function importTemplate() {
-  return request({
-    url: '/book/detail/importTemplate',
-    method: 'post',
-    responseType: 'blob'
-  })
-}
-
-// 导入书籍数据
-export function importData(data) {
-  return request({
-    url: '/book/detail/importData',
-    method: 'post',
-    data: data,
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-}

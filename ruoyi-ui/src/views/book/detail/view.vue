@@ -91,10 +91,6 @@ export default {
     },
     handleClose() {
       this.visible = false
-    },
-    /** 图片加载失败处理 */
-    handleImageError(e) {
-      e.target.src = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20placeholder&image_size=square';
     }
   }
 }

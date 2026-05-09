@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.book.mapper.BookMapper">
     
-    <resultMap type="com.ruoyi.book.domain.Book" id="BookResult">
+    <resultMap type="Book" id="BookResult">
         <result property="bookId"    column="book_id"    />
         <result property="bookName"    column="book_name"    />
         <result property="author"    column="author"    />
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select book_id, book_name, author, isbn, category, stock, cover_img, create_time, update_time from book
     </sql>
 
-    <select id="selectBookList" parameterType="com.ruoyi.book.domain.Book" resultMap="BookResult">
+    <select id="selectBookList" parameterType="Book" resultMap="BookResult">
         <include refid="selectBookVo"/>
         <where>  
             <if test="bookName != null  and bookName != ''"> and book_name like concat('%', #{bookName}, '%')</if>
@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where book_id = #{bookId}
     </select>
 
-    <insert id="insertBook" parameterType="com.ruoyi.book.domain.Book" useGeneratedKeys="true" keyProperty="bookId">
+    <insert id="insertBook" parameterType="Book" useGeneratedKeys="true" keyProperty="bookId">
         insert into book
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="bookName != null and bookName != ''">book_name,</if>
@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateBook" parameterType="com.ruoyi.book.domain.Book">
+    <update id="updateBook" parameterType="Book">
         update book
         <trim prefix="SET" suffixOverrides=",">
             <if test="bookName != null and bookName != ''">book_name = #{bookName},</if>
@@ -79,10 +79,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteBookByBookId" parameterType="Long">
         delete from book where book_id = #{bookId}
     </delete>
-
-    <select id="selectBookByIsbn" parameterType="String" resultMap="BookResult">
-        select book_id, book_name, author, isbn, category, stock, cover_img, create_time, update_time from book where isbn = #{isbn}
-    </select>
 
     <delete id="deleteBookByBookIds" parameterType="String">
         delete from book where book_id in 
